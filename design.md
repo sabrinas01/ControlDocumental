@@ -48,6 +48,13 @@ colors:
   background: '#f7f9fb'
   on-background: '#191c1e'
   surface-variant: '#e0e3e5'
+  hero-ink: '#0a1e33'
+  hero-overlay-start: '#071728'
+  hero-overlay-mid: '#0d2644'
+  manifesto-ink: '#0a2239'
+  footer-ink: '#0a0e16'
+  brand-mark-navy: '#001d32'
+  whatsapp: '#25d366'
 typography:
   display-lg:
     fontFamily: Plus Jakarta Sans
@@ -229,3 +236,62 @@ The design system uses a **Soft (`1`)** roundedness profile to maintain a sharp,
 - Table header: `#F8FAFC` background, text in `label-sm` slate 500 (`#64748B`), uppercase, tracking `+0.05em`.
 - Rows: 1px bottom border in `#F1F5F9`, `#FFFFFF` base background with alternate row hover state in `#F8FAFC`.
 - Cells maintain vertical padding of 12px and horizontal padding of 16px to optimize density for high-volume document indexes.
+
+## Landing Page — Implementation Notes
+
+`index.html` is the first real build on this system (public marketing landing, not the in-app dashboard described above). It's a single static file (Tailwind via CDN, no build step), so a few things live outside the formal token set above. This section — and the changelog at the bottom — should be kept in sync with every visual change made to the landing page.
+
+### Brand Mark
+- Source assets live in `IdentidadVisual/`. The small square badge used in the header (32px) and footer (40px) is `IdentidadVisual/logo-icon.png`: a tight crop of just the "CA" mark (no wordmark), with a real alpha-transparent background.
+- It was regenerated from the source JPEG (`logo fondo blanco.jpeg`) via denoise → threshold → erosion → edge-blur, specifically to kill JPEG compression speckle and the white halo that a naive white-key produces. Never use the full logo+wordmark lockup (`logo-transparente.png`) below ~120px — the wordmark becomes illegible mush at badge size.
+- The isologo's dark ink sample (`#001D32`, token `brand-mark-navy`) lines up almost exactly with the system's `on-primary-fixed` — treat them as the same color going forward.
+
+### Dark "Statement" Surfaces
+Hero, the "Por Qué Elegirnos" manifesto block, and the Footer use a family of near-black navy tones that sit outside `primary`/`surface` — reserved for full-bleed section backgrounds only, never for text/icon fills:
+- **Hero** (`#inicio`): base `hero-ink` (`#0A1E33`) under a photo, with a gradient scrim `hero-overlay-start/95` → `hero-overlay-mid/90` → `primary/80`.
+- **Manifesto block** (`#por-que-elegirnos`): `manifesto-ink` (`#0A2239`), with two large blurred color blobs (`primary/20`, `secondary/20`) for depth.
+- **Footer**: `footer-ink` (`#0A0E16`) — near-black, chosen specifically over the Hero's `#0A1E33` so the transparent brand mark reads with more contrast.
+
+### Motion & Interaction
+A shared `IntersectionObserver` helper (`reveal(gridSelector, cardClass, stagger)`, defined inline before `</body>`) drives scroll-triggered entrances for card grids; hover states are plain CSS.
+- **`.service-card`** (Servicios grid, 6 cards): fade + slide up 24px on scroll-into-view, 90ms stagger per card. Hover: lift `-6px` + soft shadow.
+- **`.platform-card`** (Plataformas grid, 7 logo badges): fade + slide up 18px with a scale-in (`.95` → `1`), 70ms stagger. Hover: lift `-4px`, scale to `1.04`, the logo inside scales `1.1`.
+- Both honor `prefers-reduced-motion: reduce` (entrance skipped, only the hover shadow remains).
+- **Contact method cards** (WhatsApp / Email / Instagram, `#contacto`) get a more deliberate "destacado" hover, since they're the primary conversion actions: lift + `scale(1.015)` + a 2px ring in each channel's own brand color (WhatsApp `whatsapp` `#25D366`, Email `primary`, Instagram `secondary`), plus the icon badge scales `1.1` and rotates `6°`.
+
+### Navigation
+- **Desktop** (`lg:` and up): horizontal nav in the header, per the base spec.
+- **Mobile / tablet** (below `lg`): a hamburger button (`#mobile-menu-btn`) toggles a `.mobile-menu` panel — same 6 anchors as full-width rows, active link styled like the desktop nav's active state. Transition is `max-height` + `opacity` (no JS-measured height). The menu auto-closes on link click or `Escape`, and swaps the `menu`/`close` Material Symbol on toggle.
+
+### Section-Specific Deviations from the Base Spec
+- **Servicios** renders as a 6-card grid (3-col desktop / 2-col tablet / 1-col mobile) rather than the dashboard **Data Tables** pattern — it's marketing content, not an in-app document log.
+- **Plataformas** is a 7-card logo mosaic (Exactian, Infocontrol, Control Documentario, ABBSA, Certronic, SICOP, Vicentin) with white logo chips on a tinted card; platforms without an available logo file (ABBSA) fall back to a plain colored dot in place of the image.
+
+### SEO / GEO (AI visibility) Foundation
+Production domain is `https://cacontroldocumental.com` — all canonical/OG/schema URLs below assume that domain; update them if it changes.
+- **`<head>`**: `<title>`, meta description, `robots`, canonical, `theme-color`, favicon/apple-touch-icon (both `IdentidadVisual/logo-icon.png`), full Open Graph + Twitter Card set, and a `ProfessionalService` JSON-LD block (name, logo, telephone, email, address, `areaServed` for all 9 covered localities, `sameAs` → Instagram, `makesOffer` listing the 6 services). `<html lang>` is `es-AR` (was generic `es`) for AR-specific targeting.
+- **`IdentidadVisual/og-image.png`** (1200×630): generated with Pillow — Hero-style navy gradient + glow blobs, the `logo-icon.png` mark, H1 copy, service tagline, coverage-area line, and a bottom brand/domain tag. Used for `og:image` and `twitter:image`; matters a lot here since WhatsApp link previews are the main conversion channel.
+- **Heading hierarchy fix**: the "Por Qué Elegirnos" manifesto heading was an orphan `h3` (section had no `h2`) — promoted to `h2` to match every other section.
+- **`robots.txt`**, **`sitemap.xml`**, **`llms.txt`** added at the repo root (served as static files, no `vercel.json` needed). `robots.txt` explicitly allows common AI crawlers (GPTBot, ChatGPT-User, Google-Extended, ClaudeBot, anthropic-ai, PerplexityBot, CCBot) in addition to the wildcard allow. `llms.txt` follows the [llmstxt.org](https://llmstxt.org) convention — a clean Markdown summary (services, coverage area, contact) for LLMs that fetch it directly instead of parsing the Tailwind-CDN HTML.
+- **Known gap / out of scope for a static single-page site**: no FAQ section/`FAQPage` schema yet (would help both classic SEO snippets and AI answer extraction — worth adding if the page gains an FAQ block). True SEM (paid Google Ads campaigns) needs ad-account access this session doesn't have.
+
+## Changelog
+
+Dated log of visual changes to `index.html` / `design.md`. Newest first.
+
+- **2026-10-01 (SEO/GEO pass)**
+  - Added full `<head>` metadata (title, description, canonical, OG/Twitter, favicon), `ProfessionalService` JSON-LD, `lang="es-AR"`, and a generated 1200×630 OG share image — the page had **zero** SEO meta tags before this.
+  - Fixed a heading-hierarchy gap: "Por Qué Elegirnos" promoted from an orphan `h3` to `h2`.
+  - Added `robots.txt` (incl. explicit AI-crawler allow list), `sitemap.xml`, and `llms.txt` at the repo root.
+
+- **2026-10-01**
+  - Added a mobile hamburger menu (header button + `.mobile-menu` slide panel) — the nav was previously `hidden` below `lg:` with no mobile alternative.
+  - Restructured the Contacto section: the "Sin necesidad de traslados" card moved back under the intro text (left column); WhatsApp/Email/Instagram/Disponibilidad stayed as a single-column list (not a 2-col grid) in the right column; row centered with `items-center`.
+  - Added a stronger "destacado" hover state to the 3 contact method cards (lift + scale + brand-colored ring + icon scale/rotate).
+  - Swapped the footer background from `#0D233A` to `footer-ink` (`#0A0E16`) for more contrast against the transparent logo mark.
+  - Added scroll-reveal + hover animations to the Plataformas logo cards (`.platform-card`), reusing the same `reveal()` observer pattern as Servicios.
+  - Removed the uppercase pill/badge ("Gestión documental para empresas...") above the Hero H1.
+  - Fixed the Plataformas footnote margin (`mt-6` → `mt-8`) to match the spacing convention used elsewhere (secondary block after a grid = `mt-8`).
+  - Redesigned Servicios from a single-column "ledger" list into the 6-card `.service-card` grid with scroll-reveal + hover animations described above.
+  - Rebuilt the brand mark: regenerated a true alpha-transparent logo PNG (killing JPEG speckle/white-halo) and cropped a dedicated icon-only badge (`logo-icon.png`) for the header/footer, replacing a generic placeholder avatar image.
+  - Added the Vicentin platform logo to Plataformas; fixed the platform logo `<img>` paths (were pointing at an empty, misspelled sibling folder).
