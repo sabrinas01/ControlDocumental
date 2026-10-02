@@ -254,7 +254,7 @@ Hero, the "Por Qué Elegirnos" manifesto block, and the Footer use a family of n
 
 ### Motion & Interaction
 A shared `IntersectionObserver` helper (`reveal(gridSelector, cardClass, stagger)`, defined inline before `</body>`) drives scroll-triggered entrances for card grids; hover states are plain CSS.
-- **`.service-card`** (Servicios grid, 5 cards): fade + slide up 24px on scroll-into-view, 90ms stagger per card. Hover: lift `-6px` + soft shadow.
+- **`.service-card`** (Servicios grid, 6 cards): fade + slide up 24px on scroll-into-view, 90ms stagger per card. Hover: lift `-6px` + soft shadow.
 - **`.platform-card`** (Plataformas grid, 7 logo badges): fade + slide up 18px with a scale-in (`.95` → `1`), 70ms stagger. Hover: lift `-4px`, scale to `1.04`, the logo inside scales `1.1`.
 - Both honor `prefers-reduced-motion: reduce` (entrance skipped, only the hover shadow remains).
 - **Contact method cards** (WhatsApp / Email / Instagram, `#contacto`) get a more deliberate "destacado" hover, since they're the primary conversion actions: lift + `scale(1.015)` + a 2px ring in each channel's own brand color (WhatsApp `whatsapp` `#25D366`, Email `primary`, Instagram `secondary`), plus the icon badge scales `1.1` and rotates `6°`.
@@ -264,7 +264,7 @@ A shared `IntersectionObserver` helper (`reveal(gridSelector, cardClass, stagger
 - **Mobile / tablet** (below `lg`): a hamburger button (`#mobile-menu-btn`) toggles a `.mobile-menu` panel — same 6 anchors as full-width rows, active link styled like the desktop nav's active state. Transition is `max-height` + `opacity` (no JS-measured height). The menu auto-closes on link click or `Escape`, and swaps the `menu`/`close` Material Symbol on toggle.
 
 ### Section-Specific Deviations from the Base Spec
-- **Servicios** renders as a 5-card grid (3-col desktop / 2-col tablet / 1-col mobile) rather than the dashboard **Data Tables** pattern — it's marketing content, not an in-app document log.
+- **Servicios** renders as a 6-card grid (3-col desktop / 2-col tablet / 1-col mobile) rather than the dashboard **Data Tables** pattern — it's marketing content, not an in-app document log.
 - **Plataformas** is a 7-card logo mosaic (Exactian, Infocontrol, Control Documentario, ABBSA, Certronic, SICOP, Vicentin) with white logo chips on a tinted card; platforms without an available logo file (ABBSA) fall back to a plain colored dot in place of the image.
 
 ### SEO / GEO (AI visibility) Foundation
@@ -282,6 +282,8 @@ Dated log of visual changes to `index.html` / `design.md`. Newest first.
 - **2026-10-02**
   - Restored the "Control Documental Integral" service card (its title/description and a closing `</div>` had been dropped, which nested the rest of the cards inside it and broke the grid).
   - Removed the "Altas y Gestión en Plataformas" service card (also dropped from the JSON-LD `makesOffer` list and `llms.txt`). Servicios is now 5 cards: 3 + 2 on desktop.
+  - Removed the "Control Documental Integral" service card (also dropped from JSON-LD and `llms.txt`). Servicios is now 4 cards: 3 + 1 on desktop, 2 + 2 on tablet.
+  - Added "Altas en Planta" and "Gestión de Ingresos" service cards at the start of the grid (also in JSON-LD and `llms.txt`). Servicios is back to 6 cards: 3 + 3 on desktop.
 
 - **2026-10-01 (SEO/GEO pass)**
   - Added full `<head>` metadata (title, description, canonical, OG/Twitter, favicon), `ProfessionalService` JSON-LD, `lang="es-AR"`, and a generated 1200×630 OG share image — the page had **zero** SEO meta tags before this.
