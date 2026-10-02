@@ -9,8 +9,7 @@ CA Control Documental es un servicio 100% digital y remoto que se encarga de la 
 - **Control Documental Integral**: auditoría de legajos de personal, altas tempranas en AFIP, comprobantes y nóminas F931 con pago verificado, certificados de no repetición y constancias de cobertura.
 - **Gestión de Ingresos a Planta**: tramitación y seguimiento de permisos de acceso para contratistas, subcontratistas, operarios y maquinaria vial o industrial.
 - **Seguimiento de Vencimientos**: monitoreo continuo de pólizas de ART, Seguro de Vida Obligatorio, exámenes médicos periódicos, licencias habilitantes y verificaciones técnicas vehiculares, con alertas preventivas de renovación.
-- **Altas y Gestión en Plataformas**: configuración, matriculación y administración en portales exigidos por comitentes, como Exactian, Infocontrol, SICOP, Certronic y sistemas propios (ej. Vicentin).
-- **Coordinación de Inducciones**: gestión de cupos y agendas para inducciones de seguridad (trabajo en altura, espacios confinados, bloqueo de energías).
+- **Coordinación de Turnos en Inducciones**: gestión de turnos, presenciales y online, para las inducciones que cada empresa exige para el ingreso.
 - **Carga y Actualización Continua**: subida periódica de recibos de sueldo y comprobantes de aportes patronales, y corrección inmediata de observaciones de auditores externos.
 
 ## Zona de cobertura
