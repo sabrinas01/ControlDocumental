@@ -280,6 +280,7 @@ Production domain is `https://cacontroldocumental.com` — all canonical/OG/sche
 Dated log of visual changes to `index.html` / `design.md`. Newest first.
 
 - **2026-10-02**
+  - Re-added an eyebrow pill above the Hero H1 ("Gestión documental para empresas, contratistas, técnicos y licenciados de HyS"): uppercase `label-sm`, `tracking-widest`, `secondary-fixed` text with a matching 8px dot, on a translucent rounded-full chip (`bg-surface-container-lowest/10`, `border-secondary-fixed/25`, `backdrop-blur-sm`).
   - Restored the "Control Documental Integral" service card (its title/description and a closing `</div>` had been dropped, which nested the rest of the cards inside it and broke the grid).
   - Removed the "Altas y Gestión en Plataformas" service card (also dropped from the JSON-LD `makesOffer` list and `llms.txt`). Servicios is now 5 cards: 3 + 2 on desktop.
   - Removed the "Control Documental Integral" service card (also dropped from JSON-LD and `llms.txt`). Servicios is now 4 cards: 3 + 1 on desktop, 2 + 2 on tablet.
