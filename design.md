@@ -268,7 +268,7 @@ A shared `IntersectionObserver` helper (`reveal(gridSelector, cardClass, stagger
 - **Plataformas** is a 7-card logo mosaic (Exactian, Infocontrol, Control Documentario, ABSSA, Certronic, SICOP, Vicentin) with white logo chips on a tinted card; a platform without an available logo file falls back to a plain colored dot in place of the image.
 
 ### SEO / GEO (AI visibility) Foundation
-Production domain is `https://cacontroldocumental.com` — all canonical/OG/schema URLs below assume that domain; update them if it changes.
+Production domain is `https://www.cacontroldocumental.com` (the apex `cacontroldocumental.com` 308-redirects to `www` in Vercel) — all canonical/OG/schema URLs below assume that domain; update them if it changes.
 - **`<head>`**: `<title>`, meta description, `robots`, canonical, `theme-color`, favicon/apple-touch-icon (both `IdentidadVisual/logo-icon.png`), full Open Graph + Twitter Card set, and a `ProfessionalService` JSON-LD block (name, logo, telephone, email, address, `areaServed` for all 9 covered localities, `sameAs` → Instagram, `makesOffer` listing the 6 services). `<html lang>` is `es-AR` (was generic `es`) for AR-specific targeting.
 - **`IdentidadVisual/og-image.png`** (1200×630): generated with Pillow — Hero-style navy gradient + glow blobs, the `logo-icon.png` mark, H1 copy, service tagline, coverage-area line, and a bottom brand/domain tag. Used for `og:image` and `twitter:image`; matters a lot here since WhatsApp link previews are the main conversion channel.
 - **Heading hierarchy fix**: the "Por Qué Elegirnos" manifesto heading was an orphan `h3` (section had no `h2`) — promoted to `h2` to match every other section.
