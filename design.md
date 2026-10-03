@@ -265,7 +265,7 @@ A shared `IntersectionObserver` helper (`reveal(gridSelector, cardClass, stagger
 
 ### Section-Specific Deviations from the Base Spec
 - **Servicios** renders as a 6-card grid (3-col desktop / 2-col tablet / 1-col mobile) rather than the dashboard **Data Tables** pattern — it's marketing content, not an in-app document log.
-- **Plataformas** is a 7-card logo mosaic (Exactian, Infocontrol, Control Documentario, ABBSA, Certronic, SICOP, Vicentin) with white logo chips on a tinted card; platforms without an available logo file (ABBSA) fall back to a plain colored dot in place of the image.
+- **Plataformas** is a 7-card logo mosaic (Exactian, Infocontrol, Control Documentario, ABSSA, Certronic, SICOP, Vicentin) with white logo chips on a tinted card; a platform without an available logo file falls back to a plain colored dot in place of the image.
 
 ### SEO / GEO (AI visibility) Foundation
 Production domain is `https://cacontroldocumental.com` — all canonical/OG/schema URLs below assume that domain; update them if it changes.
@@ -284,6 +284,8 @@ Dated log of visual changes to `index.html` / `design.md`. Newest first.
   - Removed the "Altas y Gestión en Plataformas" service card (also dropped from the JSON-LD `makesOffer` list and `llms.txt`). Servicios is now 5 cards: 3 + 2 on desktop.
   - Removed the "Control Documental Integral" service card (also dropped from JSON-LD and `llms.txt`). Servicios is now 4 cards: 3 + 1 on desktop, 2 + 2 on tablet.
   - Added "Altas en Planta" and "Gestión de Ingresos" service cards at the start of the grid (also in JSON-LD and `llms.txt`). Servicios is back to 6 cards: 3 + 3 on desktop.
+  - Hero feature strip (100% Digital y Ágil / Sin Demoras en Planta / Control de Vencimientos) is now title-only: subtitles removed, and the "Sin Demoras en Planta" text moved back inside its title `<p>` so all three share the same style.
+  - Plataformas: ABSSA (previously misspelled "ABBSA") now shows its logo (`LogosPlataformars/abssa.png`, cropped from the supplied `abbsa.jpeg` to remove the white margins) in the same white logo chip as the other platforms, replacing the colored-dot fallback.
 
 - **2026-10-01 (SEO/GEO pass)**
   - Added full `<head>` metadata (title, description, canonical, OG/Twitter, favicon), `ProfessionalService` JSON-LD, `lang="es-AR"`, and a generated 1200×630 OG share image — the page had **zero** SEO meta tags before this.
