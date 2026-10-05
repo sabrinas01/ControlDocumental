@@ -289,6 +289,11 @@ The page must keep working under the strict Content-Security-Policy set in `verc
 
 Dated log of visual changes to `index.html` / `design.md`. Newest first.
 
+- **2026-10-05 (technical cleanup)**
+  - No visual change. Platform logos folder renamed `IdentidadVisual/LogosPlataformars/` → `IdentidadVisual/LogosPlataformas/` (the 7 `<img>` paths updated; older entries below still use the old name).
+  - Material Symbols is loaded once (the `wght,FILL` stylesheet with `display=swap`); the duplicate full-axis `opsz,wght,FILL,GRAD` link was removed.
+  - Removed generator leftovers: `<meta name="shell-type">` and 8 empty `class=""` attributes.
+
 - **2026-10-05 (servicios)**
   - Removed the "Gestión de Ingresos a Planta" service card — it overlapped "Altas en Planta" and "Gestión de Ingresos" (also dropped from JSON-LD `makesOffer` and `llms.txt`). Servicios is now 5 cards: 3 + 2 on desktop.
   - Added the missing "Carga y Actualización Continua" to the JSON-LD `makesOffer` list, so it now matches the 5 cards.
