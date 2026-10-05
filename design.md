@@ -271,7 +271,8 @@ A shared `IntersectionObserver` helper (`reveal(gridSelector, cardClass, stagger
 Production domain is `https://www.cacontroldocumental.com` (the apex `cacontroldocumental.com` 308-redirects to `www` in Vercel) — all canonical/OG/schema URLs below assume that domain; update them if it changes.
 - **`<head>`**: `<title>`, meta description, `robots`, canonical, `theme-color`, favicon/apple-touch-icon (both `IdentidadVisual/logo-icon.png`), full Open Graph + Twitter Card set, and a `ProfessionalService` JSON-LD block (name, logo, telephone, email, address, `areaServed` for all 9 covered localities, `sameAs` → Instagram, `makesOffer` listing the 6 services). `<html lang>` is `es-AR` (was generic `es`) for AR-specific targeting.
 - **`IdentidadVisual/og-image.png`** (1200×630): generated with Pillow — Hero-style navy gradient + glow blobs, the `logo-icon.png` mark, H1 copy, service tagline, coverage-area line, and a bottom brand/domain tag. Used for `og:image` and `twitter:image`; matters a lot here since WhatsApp link previews are the main conversion channel.
-- **Heading hierarchy fix**: the "Por Qué Elegirnos" manifesto heading was an orphan `h3` (section had no `h2`) — promoted to `h2` to match every other section.
+- **Heading hierarchy**: one `h1` (Hero), one `h2` per section, `h3` for everything inside a section (cards, value props, contact methods). No `h4` — skipping a level hurts accessibility and outline parsing. The "Por Qué Elegirnos" manifesto heading was an orphan `h3` (section had no `h2`) — promoted to `h2` to match every other section.
+- **Decorative icons**: every Material Symbol `<span>` and inline service-card `<svg>` carries `aria-hidden="true"` — the symbols are ligature text (`chat`, `verified`…) that screen readers would otherwise read aloud. Any new icon must include it; icon-only controls get their name from `aria-label` on the parent.
 - **`robots.txt`**, **`sitemap.xml`**, **`llms.txt`** added at the repo root (served as static files). `robots.txt` explicitly allows common AI crawlers (GPTBot, ChatGPT-User, Google-Extended, ClaudeBot, anthropic-ai, PerplexityBot, CCBot) in addition to the wildcard allow. `llms.txt` follows the [llmstxt.org](https://llmstxt.org) convention — a clean Markdown summary (services, coverage area, contact) for LLMs that fetch it directly instead of parsing the Tailwind-CDN HTML.
 - **Known gap / out of scope for a static single-page site**: no FAQ section/`FAQPage` schema yet (would help both classic SEO snippets and AI answer extraction — worth adding if the page gains an FAQ block). True SEM (paid Google Ads campaigns) needs ad-account access this session doesn't have.
 
@@ -287,6 +288,11 @@ The page must keep working under the strict Content-Security-Policy set in `verc
 ## Changelog
 
 Dated log of visual changes to `index.html` / `design.md`. Newest first.
+
+- **2026-10-05 (audit fixes)**
+  - No visual change. Spelling/grammar: "usás", "ágilmente", "lunes a viernes", "programados", and the "Gestión de Ingresos a Planta" description (lowercase list + final period). "Seguimiento de Vencimientos" copy now reads "para que no se te pase ningún vencimiento de…".
+  - Accessibility/semantics: all 8 `h4` promoted to `h3` (same classes, so same look); `aria-hidden="true"` on the 34 Material Symbols and 6 service SVGs.
+  - `sitemap.xml` `lastmod` → 2026-10-05; `llms.txt` "lunes a viernes".
 
 - **2026-10-05 (security hardening)**
   - No visual change. Moved the inline Tailwind config and page JS into `js/tailwind-config.js` / `js/main.js`, self-hosted Tailwind 3.4.17 (`js/vendor/`) instead of the unversioned CDN, added `vercel.json` security headers (CSP, HSTS, anti-framing, etc.) and `/.well-known/security.txt`.
