@@ -239,7 +239,7 @@ The design system uses a **Soft (`1`)** roundedness profile to maintain a sharp,
 
 ## Landing Page — Implementation Notes
 
-`index.html` is the first real build on this system (public marketing landing, not the in-app dashboard described above). It's a single static file (Tailwind via CDN, no build step), so a few things live outside the formal token set above. This section — and the changelog at the bottom — should be kept in sync with every visual change made to the landing page.
+`index.html` is the first real build on this system (public marketing landing, not the in-app dashboard described above). It's a single static file (Tailwind's browser JIT build, self-hosted at `js/vendor/tailwindcss-3.4.17.js`, no build step), so a few things live outside the formal token set above. This section — and the changelog at the bottom — should be kept in sync with every visual change made to the landing page.
 
 ### Brand Mark
 - Source assets live in `IdentidadVisual/`. The small square badge used in the header (32px) and footer (40px) is `IdentidadVisual/logo-icon.png`: a tight crop of just the "CA" mark (no wordmark), with a real alpha-transparent background.
@@ -253,7 +253,7 @@ Hero, the "Por Qué Elegirnos" manifesto block, and the Footer use a family of n
 - **Footer**: `footer-ink` (`#0A0E16`) — near-black, chosen specifically over the Hero's `#0A1E33` so the transparent brand mark reads with more contrast.
 
 ### Motion & Interaction
-A shared `IntersectionObserver` helper (`reveal(gridSelector, cardClass, stagger)`, defined inline before `</body>`) drives scroll-triggered entrances for card grids; hover states are plain CSS.
+A shared `IntersectionObserver` helper (`reveal(gridSelector, cardClass, stagger)`, in `js/main.js` loaded before `</body>`) drives scroll-triggered entrances for card grids; hover states are plain CSS.
 - **`.service-card`** (Servicios grid, 6 cards): fade + slide up 24px on scroll-into-view, 90ms stagger per card. Hover: lift `-6px` + soft shadow.
 - **`.platform-card`** (Plataformas grid, 7 logo badges): fade + slide up 18px with a scale-in (`.95` → `1`), 70ms stagger. Hover: lift `-4px`, scale to `1.04`, the logo inside scales `1.1`.
 - Both honor `prefers-reduced-motion: reduce` (entrance skipped, only the hover shadow remains).
@@ -272,12 +272,24 @@ Production domain is `https://www.cacontroldocumental.com` (the apex `cacontrold
 - **`<head>`**: `<title>`, meta description, `robots`, canonical, `theme-color`, favicon/apple-touch-icon (both `IdentidadVisual/logo-icon.png`), full Open Graph + Twitter Card set, and a `ProfessionalService` JSON-LD block (name, logo, telephone, email, address, `areaServed` for all 9 covered localities, `sameAs` → Instagram, `makesOffer` listing the 6 services). `<html lang>` is `es-AR` (was generic `es`) for AR-specific targeting.
 - **`IdentidadVisual/og-image.png`** (1200×630): generated with Pillow — Hero-style navy gradient + glow blobs, the `logo-icon.png` mark, H1 copy, service tagline, coverage-area line, and a bottom brand/domain tag. Used for `og:image` and `twitter:image`; matters a lot here since WhatsApp link previews are the main conversion channel.
 - **Heading hierarchy fix**: the "Por Qué Elegirnos" manifesto heading was an orphan `h3` (section had no `h2`) — promoted to `h2` to match every other section.
-- **`robots.txt`**, **`sitemap.xml`**, **`llms.txt`** added at the repo root (served as static files, no `vercel.json` needed). `robots.txt` explicitly allows common AI crawlers (GPTBot, ChatGPT-User, Google-Extended, ClaudeBot, anthropic-ai, PerplexityBot, CCBot) in addition to the wildcard allow. `llms.txt` follows the [llmstxt.org](https://llmstxt.org) convention — a clean Markdown summary (services, coverage area, contact) for LLMs that fetch it directly instead of parsing the Tailwind-CDN HTML.
+- **`robots.txt`**, **`sitemap.xml`**, **`llms.txt`** added at the repo root (served as static files). `robots.txt` explicitly allows common AI crawlers (GPTBot, ChatGPT-User, Google-Extended, ClaudeBot, anthropic-ai, PerplexityBot, CCBot) in addition to the wildcard allow. `llms.txt` follows the [llmstxt.org](https://llmstxt.org) convention — a clean Markdown summary (services, coverage area, contact) for LLMs that fetch it directly instead of parsing the Tailwind-CDN HTML.
 - **Known gap / out of scope for a static single-page site**: no FAQ section/`FAQPage` schema yet (would help both classic SEO snippets and AI answer extraction — worth adding if the page gains an FAQ block). True SEM (paid Google Ads campaigns) needs ad-account access this session doesn't have.
+
+### Security Hardening
+The page must keep working under the strict Content-Security-Policy set in `vercel.json`, so:
+- **No inline JavaScript.** All JS lives in external files under `js/` (`tailwind-config.js` = the Tailwind theme/tokens, `main.js` = mobile menu + `reveal()`). Never add `<script>` code blocks or `onclick=`-style attributes to `index.html` — CSP `script-src 'self'` will silently block them. JSON-LD (`type="application/ld+json"`) is data, not script, and is fine inline.
+- **No third-party scripts.** Tailwind was previously loaded from `cdn.tailwindcss.com` (unversioned, no SRI possible since the CDN sends no CORS headers); it's now a pinned, self-hosted copy. Upgrading = download a new `https://cdn.tailwindcss.com/<version>` into `js/vendor/` and update the `<script src>`.
+- **Allowed external origins**: Google Fonts (`fonts.googleapis.com` CSS, `fonts.gstatic.com` font files) and `lh3.googleusercontent.com` (Hero background photo). A new external image/font/embed host must be added to the matching CSP directive in `vercel.json` or it won't load.
+- **Other headers** (all routes): HSTS (2 years, incl. subdomains), `X-Frame-Options: DENY` + `frame-ancestors 'none'` (anti-clickjacking / no embedding in phishing frames), `nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, a deny-all `Permissions-Policy` for camera/mic/geolocation/payment/sensors, and `Cross-Origin-Opener-Policy: same-origin`.
+- **`/.well-known/security.txt`** (RFC 9116) with the contact email; its `Expires` (2027-10-05) must be renewed before it lapses.
+- External links that open a new tab keep `rel="noopener noreferrer"`.
 
 ## Changelog
 
 Dated log of visual changes to `index.html` / `design.md`. Newest first.
+
+- **2026-10-05 (security hardening)**
+  - No visual change. Moved the inline Tailwind config and page JS into `js/tailwind-config.js` / `js/main.js`, self-hosted Tailwind 3.4.17 (`js/vendor/`) instead of the unversioned CDN, added `vercel.json` security headers (CSP, HSTS, anti-framing, etc.) and `/.well-known/security.txt`.
 
 - **2026-10-02**
   - Re-added an eyebrow pill above the Hero H1 ("Gestión documental para empresas, contratistas, técnicos y licenciados de HyS"): uppercase `label-sm`, `tracking-widest`, `secondary-fixed` text with a matching 8px dot, on a translucent rounded-full chip (`bg-surface-container-lowest/10`, `border-secondary-fixed/25`, `backdrop-blur-sm`).
