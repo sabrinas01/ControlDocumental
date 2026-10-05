@@ -261,7 +261,12 @@ A shared `IntersectionObserver` helper (`reveal(gridSelector, cardClass, stagger
 
 ### Navigation
 - **Desktop** (`lg:` and up): horizontal nav in the header, per the base spec.
-- **Mobile / tablet** (below `lg`): a hamburger button (`#mobile-menu-btn`) toggles a `.mobile-menu` panel — same 6 anchors as full-width rows, active link styled like the desktop nav's active state. Transition is `max-height` + `opacity` (no JS-measured height). The menu auto-closes on link click or `Escape`, and swaps the `menu`/`close` Material Symbol on toggle.
+- **Mobile / tablet** (below `lg`): a hamburger button (`#mobile-menu-btn`) toggles a `.mobile-menu` panel — same 6 anchors as full-width rows. No link is marked as active/current in either nav (all 6 share the same style) — the page is a single scroll and nothing tracks the visible section. Transition is `max-height` + `opacity` (no JS-measured height). The menu auto-closes on link click or `Escape`, and swaps the `menu`/`close` Material Symbol on toggle.
+
+### Copy Conventions
+- **Sentence case everywhere** (titles, nav, buttons, chips, labels, `<title>`/OG, JSON-LD service names, `llms.txt`): only the first word and proper nouns are capitalized — "Nuestros servicios", "Altas en planta". Proper nouns keep their capitals: CA Control Documental, WhatsApp, Instagram, Higiene y Seguridad, Seguro de Vida Obligatorio, place names and platform names. Labels styled with `uppercase` follow the same rule in the source.
+- Voseo throughout ("Tenés", "Coordiná", "usás").
+- Availability is weekdays only ("lunes a viernes") — no weekend coverage is offered anywhere.
 
 ### Section-Specific Deviations from the Base Spec
 - **Servicios** renders as a 5-card grid (3-col desktop = 3 + 2 / 2-col tablet / 1-col mobile) rather than the dashboard **Data Tables** pattern — it's marketing content, not an in-app document log.
@@ -288,6 +293,13 @@ The page must keep working under the strict Content-Security-Policy set in `verc
 ## Changelog
 
 Dated log of visual changes to `index.html` / `design.md`. Newest first.
+
+- **2026-10-05 (content decisions)**
+  - Sentence case across the whole site (see Copy Conventions), including `<title>`, OG/Twitter titles, JSON-LD service names and `llms.txt`. "Control Contratistas" chip reworded to "Control de contratistas".
+  - Nav: removed the "active" marking on "Inicio" (desktop and mobile now style all links the same, no `aria-current`) and the unused `data-path` / `data-active-classes` attributes.
+  - "Altas en planta" card: removed the bottom tagline that repeated its description; it's the only service card without that footer line.
+  - Contacto coverage list now includes Villa Gobernador Gálvez (matching JSON-LD and `llms.txt`).
+  - `llms.txt`: availability is "lunes a viernes" only (dropped the weekend-urgency claim).
 
 - **2026-10-05 (technical cleanup)**
   - No visual change. Platform logos folder renamed `IdentidadVisual/LogosPlataformars/` → `IdentidadVisual/LogosPlataformas/` (the 7 `<img>` paths updated; older entries below still use the old name).
