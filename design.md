@@ -296,6 +296,11 @@ The page must keep working under the strict Content-Security-Policy set in `verc
 
 Dated log of visual changes to `index.html` / `design.md`. Newest first.
 
+- **2026-10-05 (privacy policy)**
+  - New page `privacidad.html` (Ley 25.326): same header/brand mark as the landing but with a single "Volver al inicio" link instead of the section nav, a `max-w-3xl` article on `surface-container-lowest` (h1 `headline-lg`, numbered h2 `headline-md`, body `body-md` in `on-surface-variant`, mailto links in `primary`), and a slim one-row dark footer. No JS beyond the shared Tailwind files.
+  - Landing footer: "Política de privacidad" link added after the copyright line. `sitemap.xml` lists the new page.
+  - Content facts it states — keep in sync if they change: titular "CA Control Documental", domicile "provincia de Santa Fe" (no CUIT yet), storage = Google Drive folders shared per client (international transfer, art. 12), retention = service + 2 years, no cookies/analytics on the site (Google Fonts + Vercel only).
+
 - **2026-10-05 (service card footers)**
   - Removed the bottom footer line (top border + `verified` icon + short tagline) from the remaining 4 service cards: "De principio a fin", "Avisos anticipados de renovación", "Coordinación ágil con comitente", "Respuestas ágiles". All 5 cards now end at the description.
 
