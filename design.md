@@ -269,7 +269,7 @@ A shared `IntersectionObserver` helper (`reveal(gridSelector, cardClass, stagger
 
 ### SEO / GEO (AI visibility) Foundation
 Production domain is `https://www.cacontroldocumental.com` (the apex `cacontroldocumental.com` 308-redirects to `www` in Vercel) — all canonical/OG/schema URLs below assume that domain; update them if it changes.
-- **`<head>`**: `<title>`, meta description, `robots`, canonical, `theme-color`, favicon/apple-touch-icon (both `IdentidadVisual/logo-icon.png`), full Open Graph + Twitter Card set, and a `ProfessionalService` JSON-LD block (name, logo, telephone, email, address, `areaServed` for all 9 covered localities, `sameAs` → Instagram, `makesOffer` listing the services — currently 4 of the 5 cards; "Carga y Actualización Continua" is still missing). `<html lang>` is `es-AR` (was generic `es`) for AR-specific targeting.
+- **`<head>`**: `<title>`, meta description, `robots`, canonical, `theme-color`, favicon/apple-touch-icon (both `IdentidadVisual/logo-icon.png`), full Open Graph + Twitter Card set, and a `ProfessionalService` JSON-LD block (name, logo, telephone, email, address, `areaServed` for all 9 covered localities, `sameAs` → Instagram, `makesOffer` listing the 5 services, same names and order as the cards — keep them in sync). `<html lang>` is `es-AR` (was generic `es`) for AR-specific targeting.
 - **`IdentidadVisual/og-image.png`** (1200×630): generated with Pillow — Hero-style navy gradient + glow blobs, the `logo-icon.png` mark, H1 copy, service tagline, coverage-area line, and a bottom brand/domain tag. Used for `og:image` and `twitter:image`; matters a lot here since WhatsApp link previews are the main conversion channel.
 - **Heading hierarchy**: one `h1` (Hero), one `h2` per section, `h3` for everything inside a section (cards, value props, contact methods). No `h4` — skipping a level hurts accessibility and outline parsing. The "Por Qué Elegirnos" manifesto heading was an orphan `h3` (section had no `h2`) — promoted to `h2` to match every other section.
 - **Decorative icons**: every Material Symbol `<span>` and inline service-card `<svg>` carries `aria-hidden="true"` — the symbols are ligature text (`chat`, `verified`…) that screen readers would otherwise read aloud. Any new icon must include it; icon-only controls get their name from `aria-label` on the parent.
@@ -291,6 +291,7 @@ Dated log of visual changes to `index.html` / `design.md`. Newest first.
 
 - **2026-10-05 (servicios)**
   - Removed the "Gestión de Ingresos a Planta" service card — it overlapped "Altas en Planta" and "Gestión de Ingresos" (also dropped from JSON-LD `makesOffer` and `llms.txt`). Servicios is now 5 cards: 3 + 2 on desktop.
+  - Added the missing "Carga y Actualización Continua" to the JSON-LD `makesOffer` list, so it now matches the 5 cards.
 
 - **2026-10-05 (audit fixes)**
   - No visual change. Spelling/grammar: "usás", "ágilmente", "lunes a viernes", "programados", and the "Gestión de Ingresos a Planta" description (lowercase list + final period). "Seguimiento de Vencimientos" copy now reads "para que no se te pase ningún vencimiento de…".
