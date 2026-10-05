@@ -269,6 +269,7 @@ A shared `IntersectionObserver` helper (`reveal(gridSelector, cardClass, stagger
 - Availability is weekdays only ("lunes a viernes") — no weekend coverage is offered anywhere.
 
 ### Section-Specific Deviations from the Base Spec
+- **Servicios** cards are icon + chip, title and description only — no bottom footer/tagline line (removed 2026-10-05).
 - **Servicios** renders as a 5-card grid (3-col desktop = 3 + 2 / 2-col tablet / 1-col mobile) rather than the dashboard **Data Tables** pattern — it's marketing content, not an in-app document log.
 - **Plataformas** is a 7-card logo mosaic (Exactian, Infocontrol, Control Documentario, ABSSA, Certronic, SICOP, Vicentin) with white logo chips on a tinted card; a platform without an available logo file falls back to a plain colored dot in place of the image.
 
@@ -293,6 +294,9 @@ The page must keep working under the strict Content-Security-Policy set in `verc
 ## Changelog
 
 Dated log of visual changes to `index.html` / `design.md`. Newest first.
+
+- **2026-10-05 (service card footers)**
+  - Removed the bottom footer line (top border + `verified` icon + short tagline) from the remaining 4 service cards: "De principio a fin", "Avisos anticipados de renovación", "Coordinación ágil con comitente", "Respuestas ágiles". All 5 cards now end at the description.
 
 - **2026-10-05 (content decisions)**
   - Sentence case across the whole site (see Copy Conventions), including `<title>`, OG/Twitter titles, JSON-LD service names and `llms.txt`. "Control Contratistas" chip reworded to "Control de contratistas".
