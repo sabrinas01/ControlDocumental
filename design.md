@@ -254,7 +254,7 @@ Hero, the "Por Qué Elegirnos" manifesto block, and the Footer use a family of n
 
 ### Motion & Interaction
 A shared `IntersectionObserver` helper (`reveal(gridSelector, cardClass, stagger)`, in `js/main.js` loaded before `</body>`) drives scroll-triggered entrances for card grids; hover states are plain CSS.
-- **`.service-card`** (Servicios grid, 6 cards): fade + slide up 24px on scroll-into-view, 90ms stagger per card. Hover: lift `-6px` + soft shadow.
+- **`.service-card`** (Servicios grid, 5 cards): fade + slide up 24px on scroll-into-view, 90ms stagger per card. Hover: lift `-6px` + soft shadow.
 - **`.platform-card`** (Plataformas grid, 7 logo badges): fade + slide up 18px with a scale-in (`.95` → `1`), 70ms stagger. Hover: lift `-4px`, scale to `1.04`, the logo inside scales `1.1`.
 - Both honor `prefers-reduced-motion: reduce` (entrance skipped, only the hover shadow remains).
 - **Contact method cards** (WhatsApp / Email / Instagram, `#contacto`) get a more deliberate "destacado" hover, since they're the primary conversion actions: lift + `scale(1.015)` + a 2px ring in each channel's own brand color (WhatsApp `whatsapp` `#25D366`, Email `primary`, Instagram `secondary`), plus the icon badge scales `1.1` and rotates `6°`.
@@ -264,12 +264,12 @@ A shared `IntersectionObserver` helper (`reveal(gridSelector, cardClass, stagger
 - **Mobile / tablet** (below `lg`): a hamburger button (`#mobile-menu-btn`) toggles a `.mobile-menu` panel — same 6 anchors as full-width rows, active link styled like the desktop nav's active state. Transition is `max-height` + `opacity` (no JS-measured height). The menu auto-closes on link click or `Escape`, and swaps the `menu`/`close` Material Symbol on toggle.
 
 ### Section-Specific Deviations from the Base Spec
-- **Servicios** renders as a 6-card grid (3-col desktop / 2-col tablet / 1-col mobile) rather than the dashboard **Data Tables** pattern — it's marketing content, not an in-app document log.
+- **Servicios** renders as a 5-card grid (3-col desktop = 3 + 2 / 2-col tablet / 1-col mobile) rather than the dashboard **Data Tables** pattern — it's marketing content, not an in-app document log.
 - **Plataformas** is a 7-card logo mosaic (Exactian, Infocontrol, Control Documentario, ABSSA, Certronic, SICOP, Vicentin) with white logo chips on a tinted card; a platform without an available logo file falls back to a plain colored dot in place of the image.
 
 ### SEO / GEO (AI visibility) Foundation
 Production domain is `https://www.cacontroldocumental.com` (the apex `cacontroldocumental.com` 308-redirects to `www` in Vercel) — all canonical/OG/schema URLs below assume that domain; update them if it changes.
-- **`<head>`**: `<title>`, meta description, `robots`, canonical, `theme-color`, favicon/apple-touch-icon (both `IdentidadVisual/logo-icon.png`), full Open Graph + Twitter Card set, and a `ProfessionalService` JSON-LD block (name, logo, telephone, email, address, `areaServed` for all 9 covered localities, `sameAs` → Instagram, `makesOffer` listing the 6 services). `<html lang>` is `es-AR` (was generic `es`) for AR-specific targeting.
+- **`<head>`**: `<title>`, meta description, `robots`, canonical, `theme-color`, favicon/apple-touch-icon (both `IdentidadVisual/logo-icon.png`), full Open Graph + Twitter Card set, and a `ProfessionalService` JSON-LD block (name, logo, telephone, email, address, `areaServed` for all 9 covered localities, `sameAs` → Instagram, `makesOffer` listing the services — currently 4 of the 5 cards; "Carga y Actualización Continua" is still missing). `<html lang>` is `es-AR` (was generic `es`) for AR-specific targeting.
 - **`IdentidadVisual/og-image.png`** (1200×630): generated with Pillow — Hero-style navy gradient + glow blobs, the `logo-icon.png` mark, H1 copy, service tagline, coverage-area line, and a bottom brand/domain tag. Used for `og:image` and `twitter:image`; matters a lot here since WhatsApp link previews are the main conversion channel.
 - **Heading hierarchy**: one `h1` (Hero), one `h2` per section, `h3` for everything inside a section (cards, value props, contact methods). No `h4` — skipping a level hurts accessibility and outline parsing. The "Por Qué Elegirnos" manifesto heading was an orphan `h3` (section had no `h2`) — promoted to `h2` to match every other section.
 - **Decorative icons**: every Material Symbol `<span>` and inline service-card `<svg>` carries `aria-hidden="true"` — the symbols are ligature text (`chat`, `verified`…) that screen readers would otherwise read aloud. Any new icon must include it; icon-only controls get their name from `aria-label` on the parent.
@@ -288,6 +288,9 @@ The page must keep working under the strict Content-Security-Policy set in `verc
 ## Changelog
 
 Dated log of visual changes to `index.html` / `design.md`. Newest first.
+
+- **2026-10-05 (servicios)**
+  - Removed the "Gestión de Ingresos a Planta" service card — it overlapped "Altas en Planta" and "Gestión de Ingresos" (also dropped from JSON-LD `makesOffer` and `llms.txt`). Servicios is now 5 cards: 3 + 2 on desktop.
 
 - **2026-10-05 (audit fixes)**
   - No visual change. Spelling/grammar: "usás", "ágilmente", "lunes a viernes", "programados", and the "Gestión de Ingresos a Planta" description (lowercase list + final period). "Seguimiento de Vencimientos" copy now reads "para que no se te pase ningún vencimiento de…".

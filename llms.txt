@@ -8,7 +8,6 @@ CA Control Documental es un servicio 100% digital y remoto que se encarga de la 
 
 - **Altas en Planta**: gestión de ingresos en plantas industriales y agroexportadoras.
 - **Gestión de Ingresos**: acompañamiento en todo el proceso de ingreso.
-- **Gestión de Ingresos a Planta**: tramitación y seguimiento de permisos de acceso para contratistas, subcontratistas, operarios y maquinaria vial o industrial.
 - **Seguimiento de Vencimientos**: monitoreo continuo de pólizas de ART, Seguro de Vida Obligatorio, exámenes médicos periódicos, licencias habilitantes y verificaciones técnicas vehiculares, con alertas preventivas de renovación.
 - **Coordinación de Turnos en Inducciones**: gestión de turnos, presenciales y online, para las inducciones que cada empresa exige para el ingreso.
 - **Carga y Actualización Continua**: subida periódica de recibos de sueldo y comprobantes de aportes patronales, y corrección inmediata de observaciones de auditores externos.
