@@ -242,7 +242,7 @@ The design system uses a **Soft (`1`)** roundedness profile to maintain a sharp,
 `index.html` is the first real build on this system (public marketing landing, not the in-app dashboard described above). It's a single static file (Tailwind's browser JIT build, self-hosted at `js/vendor/tailwindcss-3.4.17.js`, no build step), so a few things live outside the formal token set above. This section — and the changelog at the bottom — should be kept in sync with every visual change made to the landing page.
 
 ### Brand Mark
-- Source assets live in `IdentidadVisual/`. The small square badge used in the header (32px) and footer (40px) is `IdentidadVisual/logo-icon.png`: a tight crop of just the "CA" mark (no wordmark), with a real alpha-transparent background.
+- Source assets live in `IdentidadVisual/`. The small square badge used in the header (40px, `w-10 h-10`) and footer (40px) is `IdentidadVisual/logo-icon.png`: a tight crop of just the "CA" mark (no wordmark), with a real alpha-transparent background.
 - It was regenerated from the source JPEG (`logo fondo blanco.jpeg`) via denoise → threshold → erosion → edge-blur, specifically to kill JPEG compression speckle and the white halo that a naive white-key produces. Never use the full logo+wordmark lockup (`logo-transparente.png`) below ~120px — the wordmark becomes illegible mush at badge size.
 - The isologo's dark ink sample (`#001D32`, token `brand-mark-navy`) lines up almost exactly with the system's `on-primary-fixed` — treat them as the same color going forward.
 
@@ -295,6 +295,9 @@ The page must keep working under the strict Content-Security-Policy set in `verc
 ## Changelog
 
 Dated log of visual changes to `index.html` / `design.md`. Newest first.
+
+- **2026-10-09**
+  - Header logo badge enlarged from 32px (`w-8 h-8`) to 40px (`w-10 h-10`) on `index.html` and `privacidad.html`, at the client's request — now the same size as the footer mark. Header height (`h-20`) unchanged.
 
 - **2026-10-05 (privacy policy)**
   - New page `privacidad.html` (Ley 25.326): same header/brand mark as the landing but with a single "Volver al inicio" link instead of the section nav, a `max-w-3xl` article on `surface-container-lowest` (h1 `headline-lg`, numbered h2 `headline-md`, body `body-md` in `on-surface-variant`, mailto links in `primary`), and a slim one-row dark footer. No JS beyond the shared Tailwind files.
