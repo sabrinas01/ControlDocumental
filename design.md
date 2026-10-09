@@ -296,6 +296,8 @@ The page must keep working under the strict Content-Security-Policy set in `verc
 
 Dated log of visual changes to `index.html` / `design.md`. Newest first.
 
+- **2026-10-09 (privacy policy roles)**
+  - `privacidad.html`, section 1 retitled "Responsable de los datos y rol de CA Control Documental": CA is *responsable* for enquirers' data and *encargada* (art. 25, Ley 25.326) for client-supplied worker data, where each client is the responsable and declares it holds the data subjects' consent. Health-data and international-transfer wording now rely on the client's declaration. Text-only change (reuses existing list classes; no CSS rebuild).
 - **2026-10-09 (servicios administrativos)**
   - New sub-section inside `#servicios` (`#servicios-administrativos`), between the 6-card grid and the CTA banner (`mt-8`): a white `rounded-2xl` panel (`border-outline-variant/50`, `p-6 lg:p-10`) with an eyebrow (`label-sm`, `primary`, uppercase), `h3` "Servicios administrativos para empresas", a `body-lg` intro, then 7 items in two columns (4 + 3 on `md+`, single column below) — each a `w-12 h-12 rounded-lg bg-primary/10` icon chip + `h4` (`title-sm`, bold) + `body-md` description — and a 3-item benefit strip under a top border (`secondary` icons). Items are static (no scroll-reveal). This is the one place `h4` is used (under the sub-section `h3`; heading levels are not skipped). Content comes from the client's "Servicios administrativos para empresas" flyer; also added to `llms.txt` and the JSON-LD `makesOffer`.
   - Icon subset regenerated with: receipt_long, table_chart, calculate, groups, desktop_windows, bar_chart, settings.
