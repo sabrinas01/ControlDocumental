@@ -255,7 +255,7 @@ Hero, the "Por Qué Elegirnos" manifesto block, and the Footer use a family of n
 ### Motion & Interaction
 A shared `IntersectionObserver` helper (`reveal(gridSelector, cardClass, stagger)`, in `js/main.js` loaded before `</body>`) drives scroll-triggered entrances for card grids; hover states are plain CSS.
 - **`.service-card`** (Servicios grid, 5 cards): fade + slide up 24px on scroll-into-view, 90ms stagger per card. Hover: lift `-6px` + soft shadow.
-- **`.platform-card`** (Plataformas grid, 7 logo badges): fade + slide up 18px with a scale-in (`.95` → `1`), 70ms stagger. Hover: lift `-4px`, scale to `1.04`, the logo inside scales `1.1`.
+- **`.platform-card`** (Plataformas grid, 8 badges): fade + slide up 18px with a scale-in (`.95` → `1`), 70ms stagger. Hover: lift `-4px`, scale to `1.04`, the logo inside scales `1.1`.
 - Both honor `prefers-reduced-motion: reduce` (entrance skipped, only the hover shadow remains).
 - **Contact method cards** (WhatsApp / Email / Instagram, `#contacto`) get a more deliberate "destacado" hover, since they're the primary conversion actions: lift + `scale(1.015)` + a 2px ring in each channel's own brand color (WhatsApp `whatsapp` `#25D366`, Email `primary`, Instagram `secondary`), plus the icon badge scales `1.1` and rotates `6°`.
 
@@ -271,7 +271,7 @@ A shared `IntersectionObserver` helper (`reveal(gridSelector, cardClass, stagger
 ### Section-Specific Deviations from the Base Spec
 - **Servicios** cards are icon + chip, title and description only — no bottom footer/tagline line (removed 2026-10-05).
 - **Servicios** renders as a 5-card grid (3-col desktop = 3 + 2 / 2-col tablet / 1-col mobile) rather than the dashboard **Data Tables** pattern — it's marketing content, not an in-app document log.
-- **Plataformas** is a 7-card logo mosaic (Exactian, Infocontrol, Control Documentario, ABSSA, Certronic, SICOP, Vicentin) with white logo chips on a tinted card; a platform without an available logo file falls back to a plain colored dot in place of the image.
+- **Plataformas** is an 8-card mosaic: 7 platform logos (Exactian, Infocontrol, Control Documentario, ABSSA, Certronic, SICOP, Vicentin) plus a last "Vía email / Gestión de documentación" card whose white chip holds a `mail` Material Symbol in `primary` instead of a logo; all use white logo chips on a tinted card; a platform without an available logo file falls back to a plain colored dot in place of the image.
 
 ### SEO / GEO (AI visibility) Foundation
 Production domain is `https://www.cacontroldocumental.com` (the apex `cacontroldocumental.com` 308-redirects to `www` in Vercel) — all canonical/OG/schema URLs below assume that domain; update them if it changes.
@@ -297,6 +297,7 @@ The page must keep working under the strict Content-Security-Policy set in `verc
 Dated log of visual changes to `index.html` / `design.md`. Newest first.
 
 - **2026-10-09**
+  - Plataformas: added an 8th card after Vicentin — "Vía email" / "Gestión de documentación", with a `mail` icon in the white chip (no logo). Desktop row is now 6 + 2.
   - Header logo badge enlarged from 32px (`w-8 h-8`) to 40px (`w-10 h-10`) on `index.html` and `privacidad.html`, at the client's request — now the same size as the footer mark. Header height (`h-20`) unchanged.
 
 - **2026-10-05 (privacy policy)**
