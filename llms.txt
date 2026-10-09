@@ -12,6 +12,16 @@ CA Control Documental es un servicio 100% digital y remoto que se encarga de la 
 - **Coordinación de turnos en inducciones**: gestión de turnos, presenciales y online, para las inducciones que cada empresa exige para el ingreso.
 - **Carga y actualización continua**: subida periódica de recibos de sueldo y comprobantes de aportes patronales, y corrección ágil de observaciones de auditores externos.
 
+### Servicios administrativos para empresas
+
+- **Facturación**: emisión de facturas, gestión de comprobantes y seguimiento de cobros.
+- **Planillas de horas**: armado y control de planillas de horas para técnicos de HyS y personal en obra.
+- **Registración contable**: carga de comprobantes, registración básica y organización de la información.
+- **Gestión de proveedores**: altas, actualizaciones y control de documentación.
+- **Carga en plataformas**: carga de documentación en portales de clientes y sistemas de gestión.
+- **Organización documental**: clasificación y archivo digital de comprobantes, contratos y documentación administrativa.
+- **Reportes y seguimiento**: control de vencimientos y reportes personalizados según las necesidades de la empresa.
+
 ## Zona de cobertura
 
 Rosario, San Lorenzo, Puerto General San Martín, Villa Constitución, Capitán Bermúdez, Alvear, Pérez, Timbúes y Villa Gobernador Gálvez (provincia de Santa Fe, Argentina). El servicio es totalmente remoto y digital, sin necesidad de traslados ni oficinas fijas.
