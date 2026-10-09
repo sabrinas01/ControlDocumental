@@ -239,7 +239,7 @@ The design system uses a **Soft (`1`)** roundedness profile to maintain a sharp,
 
 ## Landing Page — Implementation Notes
 
-`index.html` is the first real build on this system (public marketing landing, not the in-app dashboard described above). It's a single static file (Tailwind's browser JIT build, self-hosted at `js/vendor/tailwindcss-3.4.17.js`, no build step), so a few things live outside the formal token set above. This section — and the changelog at the bottom — should be kept in sync with every visual change made to the landing page.
+`index.html` is the first real build on this system (public marketing landing, not the in-app dashboard described above). It's a static page styled with Tailwind 3.4.17 **compiled to `css/styles.css`** (source: `css/input.css` + `tailwind.config.js`; rebuild with `npm install` once and `npm run build:css` after any class/token change — the compiled file is committed, Vercel runs no build), so a few things live outside the formal token set above. This section — and the changelog at the bottom — should be kept in sync with every visual change made to the landing page.
 
 ### Brand Mark
 - Source assets live in `IdentidadVisual/`. The small square badge used in the header (40px, `w-10 h-10`) and footer (40px) is `IdentidadVisual/logo-icon.png`: a tight crop of just the "CA" mark (no wordmark), with a real alpha-transparent background.
@@ -284,9 +284,9 @@ Production domain is `https://www.cacontroldocumental.com` (the apex `cacontrold
 
 ### Security Hardening
 The page must keep working under the strict Content-Security-Policy set in `vercel.json`, so:
-- **No inline JavaScript.** All JS lives in external files under `js/` (`tailwind-config.js` = the Tailwind theme/tokens, `main.js` = mobile menu + `reveal()`). Never add `<script>` code blocks or `onclick=`-style attributes to `index.html` — CSP `script-src 'self'` will silently block them. JSON-LD (`type="application/ld+json"`) is data, not script, and is fine inline.
-- **No third-party scripts.** Tailwind was previously loaded from `cdn.tailwindcss.com` (unversioned, no SRI possible since the CDN sends no CORS headers); it's now a pinned, self-hosted copy. Upgrading = download a new `https://cdn.tailwindcss.com/<version>` into `js/vendor/` and update the `<script src>`.
-- **Allowed external origins**: Google Fonts (`fonts.googleapis.com` CSS, `fonts.gstatic.com` font files) and `lh3.googleusercontent.com` (Hero background photo). A new external image/font/embed host must be added to the matching CSP directive in `vercel.json` or it won't load.
+- **No inline JavaScript.** All JS lives in external files under `js/` (`main.js` = mobile menu + `reveal()`). Never add `<script>` code blocks or `onclick=`-style attributes to `index.html` — CSP `script-src 'self'` will silently block them. **No inline CSS either** (`<style>` blocks or `style=""` attributes): `style-src` is `'self'` only, so put rules in `css/input.css` and rebuild. JSON-LD (`type="application/ld+json"`) is data, not script, and is fine inline.
+- **No third-party scripts.** Tailwind used to run in the browser (cdn, then a self-hosted 407 KB copy); it's now compiled at build time, so no Tailwind JS ships.
+- **No external origins at all.** Fonts are self-hosted in `fonts/` (Plus Jakarta Sans latin + latin-ext, variable 400–700; Material Symbols Outlined as a ~8 KB subset containing only the icons in use) and the Hero photo is `IdentidadVisual/hero.jpg`. **When you use a new Material icon**, regenerate the subset: request `https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&icon_names=<sorted,comma,list>` with a Chrome User-Agent and download the `woff2` it returns over `fonts/material-symbols-outlined.woff2` — otherwise the icon renders as its text name. Current set: arrow_forward, bolt, chat, check_circle, close, cloud_done, event_upcoming, fact_check, folder_managed, health_and_safety, hourglass_top, location_on, mail, menu, photo_camera, schedule, security, support_agent, timer, verified_user.
 - **Other headers** (all routes): HSTS (2 years, incl. subdomains), `X-Frame-Options: DENY` + `frame-ancestors 'none'` (anti-clickjacking / no embedding in phishing frames), `nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, a deny-all `Permissions-Policy` for camera/mic/geolocation/payment/sensors, and `Cross-Origin-Opener-Policy: same-origin`.
 - **Client preview domain**: `preview.cacontroldocumental.com` is a Vercel project domain bound to the `develop` branch (CNAME in Cloudflare → `cname.vercel-dns.com`, DNS-only). Vercel Authentication (`all_except_custom_domains`) still protects it — that exception only covers *production* custom domains — so clients get a non-expiring shareable link on this alias (`?_vercel_share=…`, created 2026-10-05). Opening it once sets a cookie; after that the plain URL works in that browser. `vercel.json` adds `X-Robots-Tag: noindex, nofollow` only for that host so it never competes with `www` in search.
 - **`/.well-known/security.txt`** (RFC 9116) with the contact email; its `Expires` (2027-10-05) must be renewed before it lapses.
@@ -296,6 +296,21 @@ The page must keep working under the strict Content-Security-Policy set in `verc
 
 Dated log of visual changes to `index.html` / `design.md`. Newest first.
 
+- **2026-10-09 (technical pass)**
+  - No visual change intended. Tailwind is compiled (`css/styles.css`, 28 KB) instead of running in the browser; removed `js/vendor/` and `js/tailwind-config.js`. Inline `<style>` and `style=""` moved into `css/input.css` (`.hero-bg`, `.icon-fill`); `<noscript>` now links `css/noscript.css`.
+  - Self-hosted fonts (`fonts/`) and the Hero photo (`IdentidadVisual/hero.jpg`); CSP now allows `'self'` only for style/font/img.
+  - Images: `logo-icon.png` 151 KB → 3 KB (160 px), platform logos resized to 64 px high with `width`/`height` set, `control documentario.png` renamed `control-documentario.png`, added `apple-touch-icon.png` (180 px) and `favicon.ico`; removed unused `logo fondo transparente.jpeg`.
+  - Copy: Plataformas card label "Control Doc." → "Control Documentario" (matches its logo and the privacy policy); rewrote the "Altas en planta" and "Gestión de ingresos" descriptions so they no longer overlap (alta of company/staff/vehicles vs. coordination of each ingress).
+  - Hero pill shortened to "Para empresas, contratistas y profesionales de HyS" (it wrapped on mobile).
+  - `vercel.json`: caching for `/fonts` (immutable), `/css` + `/js` (1 h), `/IdentidadVisual` (1 day).
+- **2026-10-09 (review pass)**
+  - WhatsApp buttons (hero, CTA banner, floating) now use `#0F7B40` (hover `#0B6634`) instead of `#25D366`/`#20ba5a`: white text on the brand green was ~2:1, now ~5.3:1 (WCAG AA). The contact-card icon badge keeps the original brand `#25D366`.
+  - Removed `::-webkit-scrollbar{display:none}` — the page scrollbar is visible again.
+  - `.mobile-menu` is now `visibility:hidden` when closed, so its links are no longer reachable by Tab or screen readers.
+  - Added a `<noscript>` style so service/platform cards show without JS.
+  - Platform logos use `alt=""` (the visible name already labels them); header/footer logos got `width`/`height` 40.
+  - Copy: "Capacitación" tag → "Inducciones"; removed absolute claims in the Servicios intro; SHyMA/SHE spelled out; fixed the Plataformas footnote wording.
+  - WhatsApp links carry a prefilled message.
 - **2026-10-09**
   - Plataformas: added an 8th card after Vicentin — "Vía email" / "Gestión de documentación", with a `mail` icon in the white chip (no logo). Desktop row is now 6 + 2.
   - Header logo badge enlarged from 32px (`w-8 h-8`) to 40px (`w-10 h-10`) on `index.html` and `privacidad.html`, at the client's request — now the same size as the footer mark. Header height (`h-20`) unchanged.
