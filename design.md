@@ -248,7 +248,7 @@ The design system uses a **Soft (`1`)** roundedness profile to maintain a sharp,
 
 ### Dark "Statement" Surfaces
 Hero, the "Por Qué Elegirnos" manifesto block, and the Footer use a family of near-black navy tones that sit outside `primary`/`surface` — reserved for full-bleed section backgrounds only, never for text/icon fills:
-- **Hero** (`#inicio`): base `hero-ink` (`#0A1E33`) under a photo, with a gradient scrim `hero-overlay-start/95` → `hero-overlay-mid/90` → `primary/80`.
+- **Hero** (`#inicio`): base `hero-ink` (`#0A1E33`) with no photo; the brand logo (`IdentidadVisual/logo-fondo-negro.jpg`, black background) sits at the right as a watermark (`mix-blend-screen`, `opacity-30`, hidden below `md`) so the black drops out, under a gradient scrim `hero-overlay-start/95` → `hero-overlay-mid/90` → `primary/80`.
 - **Manifesto block** (`#por-que-elegirnos`): `manifesto-ink` (`#0A2239`), with two large blurred color blobs (`primary/20`, `secondary/20`) for depth.
 - **Footer**: `footer-ink` (`#0A0E16`) — near-black, chosen specifically over the Hero's `#0A1E33` so the transparent brand mark reads with more contrast.
 
@@ -297,10 +297,12 @@ The page must keep working under the strict Content-Security-Policy set in `verc
 Dated log of visual changes to `index.html` / `design.md`. Newest first.
 
 - **2026-10-09 (technical pass)**
-  - No visual change intended. Tailwind is compiled (`css/styles.css`, 28 KB) instead of running in the browser; removed `js/vendor/` and `js/tailwind-config.js`. Inline `<style>` and `style=""` moved into `css/input.css` (`.hero-bg`, `.icon-fill`); `<noscript>` now links `css/noscript.css`.
-  - Self-hosted fonts (`fonts/`) and the Hero photo (`IdentidadVisual/hero.jpg`); CSP now allows `'self'` only for style/font/img.
+  - No visual change intended. Tailwind is compiled (`css/styles.css`, 28 KB) instead of running in the browser; removed `js/vendor/` and `js/tailwind-config.js`. Inline `<style>` and `style=""` moved into `css/input.css` (`.icon-fill`); `<noscript>` now links `css/noscript.css`.
+  - Self-hosted fonts (`fonts/`); CSP now allows `'self'` only for style/font/img.
+  - Hero: removed the AI-generated (Google Stitch) background photo and its `.hero-bg` rule — licence unclear and only 512 px wide. The Hero is now the navy gradient plus the brand logo as a blended watermark (see Dark "Statement" Surfaces).
   - Images: `logo-icon.png` 151 KB → 3 KB (160 px), platform logos resized to 64 px high with `width`/`height` set, `control documentario.png` renamed `control-documentario.png`, added `apple-touch-icon.png` (180 px) and `favicon.ico`; removed unused `logo fondo transparente.jpeg`.
   - Copy: Plataformas card label "Control Doc." → "Control Documentario" (matches its logo and the privacy policy); rewrote the "Altas en planta" and "Gestión de ingresos" descriptions so they no longer overlap (alta of company/staff/vehicles vs. coordination of each ingress).
+  - Plataformas: added a trademark disclaimer line under the logo grid (`body-sm`, `on-surface-variant`, centered, `mt-6`): names/logos belong to their owners, shown only to indicate compatibility, no affiliation.
   - Hero pill shortened to "Para empresas, contratistas y profesionales de HyS" (it wrapped on mobile).
   - `vercel.json`: caching for `/fonts` (immutable), `/css` + `/js` (1 h), `/IdentidadVisual` (1 day).
 - **2026-10-09 (review pass)**
