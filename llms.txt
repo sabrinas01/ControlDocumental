@@ -10,7 +10,7 @@ CA Control Documental es un servicio 100% digital y remoto que se encarga de la 
 - **Gestión de ingresos**: coordinación de cada ingreso con la planta, desde la solicitud hasta la autorización (fechas, accesos y documentación requerida).
 - **Seguimiento de vencimientos**: monitoreo continuo de pólizas de ART, Seguro de Vida Obligatorio, exámenes médicos periódicos, licencias habilitantes y verificaciones técnicas vehiculares, con alertas preventivas de renovación.
 - **Coordinación de turnos en inducciones**: gestión de turnos, presenciales y online, para las inducciones que cada empresa exige para el ingreso.
-- **Carga y actualización continua**: subida periódica de recibos de sueldo y comprobantes de aportes patronales, y corrección inmediata de observaciones de auditores externos.
+- **Carga y actualización continua**: subida periódica de recibos de sueldo y comprobantes de aportes patronales, y corrección ágil de observaciones de auditores externos.
 
 ## Zona de cobertura
 
@@ -21,4 +21,4 @@ Rosario, San Lorenzo, Puerto General San Martín, Villa Constitución, Capitán 
 - WhatsApp: +54 9 341 366-8341 — https://wa.me/5493413668341
 - Email: controldocumental.ca@gmail.com
 - Instagram: https://www.instagram.com/controldocumental/
-- Disponibilidad: lunes a viernes.
+- Días de trabajo: lunes a viernes.

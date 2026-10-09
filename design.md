@@ -296,6 +296,8 @@ The page must keep working under the strict Content-Security-Policy set in `verc
 
 Dated log of visual changes to `index.html` / `design.md`. Newest first.
 
+- **2026-10-09 (copy claims)**
+  - No visual change. Removed absolute/unverifiable promises from the copy (legal risk): "Garantizamos que…" → "Trabajamos para que…"; hero strip "Sin demoras en planta" → "Menos demoras en planta"; card footers "Cero rechazos técnicos" → "Revisión legajo por legajo", "Procesos en tiempo real" → "Seguimiento continuo", "Cumplimiento asegurado" → "Vencimientos bajo control", "Respuesta inmediata" → "Trato directo"; "Asistencia inmediata" → "Asistencia urgente"; contact label "Atención inmediata" → "Atención directa"; "ningún vencimiento", "cualquier obligación/auditoría", "todos los sistemas" and "corrección inmediata" softened. The Contacto availability card is titled "Días de trabajo" (was "Disponibilidad operativa") because there is no fixed schedule to publish — only "lunes a viernes". Convention: avoid "inmediato/a", "garantizamos", "asegurado", "cero", "100%" (except "100% digital") in marketing copy.
 - **2026-10-09 (technical pass)**
   - No visual change intended. Tailwind is compiled (`css/styles.css`, 28 KB) instead of running in the browser; removed `js/vendor/` and `js/tailwind-config.js`. Inline `<style>` and `style=""` moved into `css/input.css` (`.icon-fill`); `<noscript>` now links `css/noscript.css`.
   - Self-hosted fonts (`fonts/`); CSP now allows `'self'` only for style/font/img.
