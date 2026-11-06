@@ -297,6 +297,8 @@ The page must keep working under the strict Content-Security-Policy set in `verc
 
 Dated log of visual changes to `index.html` / `design.md`. Newest first.
 
+- **2026-11-06 (servicios administrativos copy)**
+  - No visual change. In `#servicios-administrativos` the item "Registración contable" was renamed "Carga de comprobantes" (description: "Registro básico y organización de la información de tus comprobantes."), also in `llms.txt` and the JSON-LD `makesOffer`, so the site doesn't present an accounting service that requires a Contador Público licence. Team professions stay unnamed on the site by the client's choice.
 - **2026-10-09 (privacy policy roles)**
   - `privacidad.html`, section 1 retitled "Responsable de los datos y rol de CA Control Documental": CA is *responsable* for enquirers' data and *encargada* (art. 25, Ley 25.326) for client-supplied worker data, where each client is the responsable and declares it holds the data subjects' consent. Health-data and international-transfer wording now rely on the client's declaration. Text-only change (reuses existing list classes; no CSS rebuild).
 - **2026-10-09 (servicios administrativos)**

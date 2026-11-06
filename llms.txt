@@ -16,7 +16,7 @@ CA Control Documental es un servicio 100% digital y remoto que se encarga de la 
 
 - **Facturación**: emisión de facturas, gestión de comprobantes y seguimiento de cobros.
 - **Planillas de horas**: armado y control de planillas de horas para técnicos de HyS y personal en obra.
-- **Registración contable**: carga de comprobantes, registración básica y organización de la información.
+- **Carga de comprobantes**: registro básico y organización de la información de los comprobantes.
 - **Gestión de proveedores**: altas, actualizaciones y control de documentación.
 - **Carga en plataformas**: carga de documentación en portales de clientes y sistemas de gestión.
 - **Organización documental**: clasificación y archivo digital de comprobantes, contratos y documentación administrativa.
